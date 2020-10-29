@@ -4,14 +4,14 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html>
+<html lang="es">
     <head>
         <meta charset="UTF-8">
         <title></title>
     </head>
     <body>
-         <table>
-             <caption>Con MSQLi</caption>
+        <table>
+            <caption>Con PDO</caption>
             <tr>
                 <th>Codigo departamento</th>
                 <th>Descripcion</th>
@@ -19,23 +19,27 @@ and open the template in the editor.
                 <th>Valor</th>
             </tr>
         <?php
-            $conexion = new mysqli("192.168.1.115", "usuarioDAW204DBDepartamentos", "P@ssw0rd", "DAW204DBDepartamentos");
-            if($conexion -> connect_errno){
-                echo "<p>Error en la conexion: ".$conexion -> connect_error. "(Error: ". $conexion -> connect_errno.")</p>";
-            } else {
-                $datos = $conexion ->query("select * from Departamento");
-                
-                foreach($datos as $fila){
+            try {
+                $conexion = new PDO(DSN, USER, PASSWORD);
+                 $datos = $conexion -> query("select * from Departamento");
+                 
+                 
+                 foreach($datos as $fila){
                      echo "<tr>\n";
                      echo "<td>".$fila['CodDepartamento']."</td>\n";
                      echo "<td>".$fila['DescDepartamento']."</td>\n";
                      echo "<td>".$fila['FechaBaja']."</td>\n";
                      echo "<td>".$fila['VolumenNegocio']."</td>\n";
                      echo "</tr>\n";
-                }
+                 }
+            } catch (Exception $ex) {
+                echo "<p>Error en la conexion: ".$ex ->getMessage(). "(Error: ". $ex ->getCode().")</p>";
+            } finally {
+                unset($conexion);
             }
-            $conexion ->close()
+            
+            
         ?>
-         </table>
+            </table>
     </body>
 </html>
