@@ -19,13 +19,16 @@ and open the template in the editor.
                 <th>Valor</th>
             </tr>
         <?php
+        require_once '../config/confDBMySQLi.php';
+        //Establece la conexion a la base de datos mediante las constantes declaradas en el archivo confMySQLi
             $conexion = new mysqli (HOST, USER, PASSWORD, DBNAME);
+            //Si la conexión devuelve algo distindo de 0 entrará en el if y saldra un mensaje de error
             if($conexion -> connect_errno){
                 echo "<p>Error en la conexion: ".$conexion -> connect_error. "(Error: ". $conexion -> connect_errno.")</p>";
-            } else {
+            } else {//En caso de una conexion exitosa almacena el resultado del query en $datos
                 $datos = $conexion ->query("select * from Departamento");
                 
-                foreach($datos as $fila){
+                foreach($datos as $fila){//Se recorre los datos del query
                      echo "<tr>\n";
                      echo "<td>".$fila['CodDepartamento']."</td>\n";
                      echo "<td>".$fila['DescDepartamento']."</td>\n";
@@ -34,7 +37,7 @@ and open the template in the editor.
                      echo "</tr>\n";
                 }
             }
-            $conexion ->close()
+            $conexion ->close()//Se cierra la conexion
         ?>
          </table>
     </body>

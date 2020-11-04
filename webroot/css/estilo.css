@@ -1,217 +1,58 @@
-@import url('https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@500&display=swap');
-*{
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-}
-
+@import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300&display=swap');
 html{
-    padding: 15px;
+    margin: 0;
+    padding: 0;
 }
 
 body{
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 15px;
+    background-color: whitesmoke;
+    padding: 15px;
+    
 }
 
-.tarjeta{
-    width: 225px;
-    height: 375px;
-    position: relative;
-    overflow: hidden;
+header{
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: space-around;
+    align-items: center;
 }
 
-.tarjeta .imagen{
-    background-attachment: local;
-    background-size: 100% 100% ;
+main{
+    margin-bottom: 40px;
+}
+
+table{
+    margin: auto;
     width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    filter: grayscale(100%);
+    
 }
 
-
-
-.tarjeta h2{
-    color: white;
-    position: absolute;
-    top: 2.5%;
+table td{
+    background-color: rgb(139, 134, 134);
+    color: whitesmoke;
     text-align: center;
-    font-family: 'Sansita Swashed', cursive;
+    font-family: 'Oxygen', sans-serif;
 }
 
-.tarjeta ul{
-    position: absolute;
-    top: -15%;
-    list-style: none;
-    transform: rotate(90deg);
+table tr td:nth-of-type(1), table thead th:nth-child(2){
+    width: 75%;
 }
 
-.tarjeta ul li{
-    width: 2px;
-    height: 2px;
-    border-radius: 6px;
-    border: 2px solid #ffffff;
-    margin: 6px 0;
-    background-color: #ffffff;
-}
-
-.tarjeta:before {
-    content: "";
-    z-index: 99;
-    position: absolute;
-    left: -10px;
-    top: 11.65%;
-    display: block;
-    width: 16px;
-    height: 16px;
-    border-radius: 16px;
-    background-color: #ffffff;
-}
-.tarjeta:after {
-    content: "";
-    z-index: 99;
-    position: absolute;
-    right: -10px;
-    top: 11.65%;
-    width: 16px;
-    height: 16px;
-    border-radius: 16px;
-    background-color: #ffffff;
-}
-
-
-.tarjeta .botones{
-    width: 32px;
-    position: absolute;
-    left: 25px;
-    top: 25%;
-}
-
-.tarjeta .botones .gitHub, .tarjeta .botones .codigo{
-    width: 32px;
-    height: 32px;
-    opacity: 0;
-    transition: all 0.5s ease;
-    transform: scale(0.1);
-}
-
-.tarjeta  img{
-    width: inherit;
-    height: inherit;
-}
-
-.tarjeta .boton{
-    position: absolute;
-    bottom: 0;
-    background-color: #aca5a5;
-    width: 100%;
-    height: 75px;
-}
-
-.tarjeta .ejecutar{
-    width: 50px;
-    height: 50px;
-    position: absolute;
-    bottom: 25%;
-    left: 25px;
-    z-index: 100;
-    opacity: 0;
-    transform: scale(0.1);
-    transition: all 1s ease;
-}
-
-.tarjeta .boton p{
-
-    z-index: 100;
-    position: absolute;
-    top: 5%;
-    left: 15px;
-    color: #333;
-    opacity: 0.7;
-    font-size: 15px;
-    letter-spacing: 1px;
-    transition: all 0.2s ease;
-}
-
-.tarjeta .circulo{
-    position: absolute;
-    right: 14px;
-    bottom: 14px;
-    width: 30px;
-    height: 30px;
-
-    border: none;
-    border-radius: 30px;
-    outline: none;
-    transition: all 0.3s ease;
-    mix-blend-mode: hard-light;
-}
-
-.tarjeta:hover .circulo{
-    transform: scale(15.5);
-}
-
-.tarjeta:hover .circulo{
-    z-index: 90;
-    transform: scale(15.5);
-}
-
-.tarjeta:hover .boton p{
+table th{
+    
+    background-color: rgb(66, 62, 63);
     color: white;
 }
 
-.tarjeta:hover .ejecutar{
-    transform: scale(1);
-    opacity: 1;
-}
 
-.tarjeta:hover .botones .gitHub{
-    transform: scale(1);
-    opacity: 1;
-    transition-delay: 0.4s;
-}
-
-.tarjeta:hover .botones .codigo{
-    transform: scale(1);
-    opacity: 1;
-    transition-delay: 0.2s;
-}
-
-.tarjeta:hover .imagen{
-    filter: grayscale(0%);
-}
-
-/*Diseño propio de cada tarjeta*/
-.tarjeta1 .imagen{
-    background-image: url(../images/Fondo-de-pantalla-de-arbol.jpg);
-}
-.tarjeta1 .circulo{
-    background-color: #8E4F00;
-}
-
-@media (max-width: 450px){
-    body{
-        grid-template-columns: repeat(1, 1fr);
-    }
-}
-
-@media (min-width: 451px) and (max-width: 768px){
-    body{
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (min-width:769px) and (max-width: 1024px){
-    body{
-        grid-template-columns: repeat(4, 1fr);
-    }
+footer{
+    position: fixed;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    bottom: 0;
+    left: 0;
+    background-color: rgb(67, 67, 67);
+    padding: 5px;
+    justify-content: space-around;
+    color: white;
 }

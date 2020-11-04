@@ -8,6 +8,8 @@
  * Created: 27 oct. 2020
  */
 
+use DAW204DBDepartamentos;
+
 INSERT INTO Departamento(CodDepartamento,DescDepartamento,FechaBaja,VolumenNegocio) VALUES
 ('INF', 'Departamento de informatica',null,1),
 ('MEC', 'Departamento de mecanica',null,2),
