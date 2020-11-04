@@ -19,18 +19,24 @@ and open the template in the editor.
                 <th>Valor</th>
             </tr>
         <?php
+            require_once "../config/confDBPDO.php";
             try {
                 $conexion = new PDO(DSN, USER, PASSWORD);
-                 $datos = $conexion -> query("select * from Departamento");
+                 $prepare = $conexion ->prepare("select * from Departamento");
+                 $ejecucion = $prepare ->execute();
+                 if( !$ejecucion ){
+                     throw new Exception("Error al realizar la consulta");
+                 }
                  
-                 
-                 foreach($datos as $fila){
+                 $resultado = $prepare ->fetch();
+                 while ($resultado){
                      echo "<tr>\n";
-                     echo "<td>".$fila['CodDepartamento']."</td>\n";
-                     echo "<td>".$fila['DescDepartamento']."</td>\n";
-                     echo "<td>".$fila['FechaBaja']."</td>\n";
-                     echo "<td>".$fila['VolumenNegocio']."</td>\n";
+                     echo "<td>".$resultado['CodDepartamento']."</td>\n";
+                     echo "<td>".$resultado['DescDepartamento']."</td>\n";
+                     echo "<td>".$resultado['FechaBaja']."</td>\n";
+                     echo "<td>".$resultado['VolumenNegocio']."</td>\n";
                      echo "</tr>\n";
+                     $resultado = $prepare ->fetch();
                  }
             } catch (Exception $ex) {
                 echo "<p>Error en la conexion: ".$ex ->getMessage(). "(Error: ". $ex ->getCode().")</p>";
