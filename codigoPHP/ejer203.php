@@ -76,7 +76,7 @@ and open the template in the editor.
             $formulario['volumen'] = $_REQUEST['volumen'];
             try {
                 $conexion = new PDO(DSN, USER, PASSWORD);
-                $prepare = $conexion->prepare("Insert into Departamentos('CodDepartamento','DescDepartamento','VolumenNegocio') values (:codigo , :descripcion , :volumen)");
+                $prepare = $conexion->prepare("Insert into Departamento(CodDepartamento, DescDepartamento, VolumenNegocio) values (:codigo , :descripcion , :volumen)");
                 $ejecucion = $prepare->execute(array(":codigo" => $formulario['codigo'], ":descripcion" => $formulario['descripcion'], ":volumen" => $formulario['volumen']));
 
                 if ($ejecucion) {
@@ -93,17 +93,17 @@ and open the template in the editor.
             ?>
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                 <label for="codigo">Introduce el codigo del departamento: </label>
-                <input type="text" id="codigo" name="codigo" value="<?php if (isset($_REQUEST["codigo"])) echo $_REQUEST["codigo"]; ?>">
+                <input type="text" id="codigo" name="codigo" value="<?php if (isset($_REQUEST["codigo"])) echo $_REQUEST["codigo"]; ?>"><br>
                 <?php
                 echo!empty($errores['codigo']) ? "<p class=\"error\">" . $errores['codigo'] . "</p>" : "";
                 ?>
                 <label for="descripcion">Introduce una descripción del departamento: </label>
-                <input type="text" id="descripcion" name="descripcion" value="<?php if (isset($_REQUEST["descripcion"])) echo $_REQUEST["descripcion"]; ?>">
+                <input type="text" id="descripcion" name="descripcion" value="<?php if (isset($_REQUEST["descripcion"])) echo $_REQUEST["descripcion"]; ?>"><br>
                 <?php
                 echo!empty($errores['descripcion']) ? "<p class=\"error\">" . $errores['descripcion'] . "</p>" : "";
                 ?>
                 <label for="volumen">Introduce el volumen de negocio: </label>
-                <input type="text" id="volumen" name="volumen" value="<?php if (isset($_REQUEST["volumen"])) echo $_REQUEST["volumen"]; ?>">
+                <input type="text" id="volumen" name="volumen" value="<?php if (isset($_REQUEST["volumen"])) echo $_REQUEST["volumen"]; ?>"><br>
                 <?php
                 echo!empty($errores['volumen']) ? "<p class=\"error\">" . $errores['volumen'] . "</p>" : "";
                 ?>
