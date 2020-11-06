@@ -33,7 +33,7 @@
                 </tr>
                 <tr>
                     <th>1º</th>
-                    <td>Hover</td>
+                    <td>Conexion</td>
                     <td><a href="mostrarCodigo/muestraEjercicio101.php"><img src="webroot/images/ver.png" alt="ver" height="32"></a></td>
                     <td><a href="./codigoPHP/ejer101.php"><img src="webroot/images/ejecutar.png" alt="ejecutar" height="32"></a></td>
                     <td><a href="mostrarCodigo/muestraEjercicio201.php"><img src="webroot/images/ver.png" alt="ver" height="32"></a></td>
@@ -41,7 +41,7 @@
                 </tr>
                 <tr>
                     <th>2º</th>
-                    <td>Inicializar y mostrar una variable heredoc</td>
+                    <td>Tablas</td>
                     <td><a href="mostrarCodigo/muestraEjercicio102.php"><img src="webroot/images/ver.png" alt="ver" height="32"></a></td>
                     <td><a href="./codigoPHP/ejer102.php"><img src="webroot/images/ejecutar.png" alt="ejecutar" height="32"></a></td>
                     <td><a href="mostrarCodigo/muestraEjercicio202.php"><img src="webroot/images/ver.png" alt="ver" height="32"></a></td>
@@ -49,12 +49,17 @@
                 </tr>
                 <tr>
                     <th>3º</th>
-                    <td>Hora y fecha formateada al castellano</td>
-                    <td><a href="./mostrarCodigo/muestraEjercicio03.php"><img src="webroot/images/ver.png" alt="ver" height="32"></a></td>
-                    <td><a href="./codigoPHP/ejer03.php"><img src="webroot/images/ejecutar.png" alt="ejecutar" height="32"></a></td>
+                    <td colspan="3">Insertar</td>
                     <td><a href="mostrarCodigo/muestraEjercicio203.php"><img src="webroot/images/ver.png" alt="ver" height="32"></a></td>
                     <td><a href="./codigoPHP/ejer203.php"><img src="webroot/images/ejecutar.png" alt="ejecutar" height="32"></a></td>
                 </tr>
+                <tr>
+                    <th>3º</th>
+                    <td colspan="3">Hora y fecha formateada al castellano</td>
+                    <td><a href="mostrarCodigo/muestraEjercicio203.php"><img src="webroot/images/ver.png" alt="ver" height="32"></a></td>
+                    <td><a href="./codigoPHP/ejer203.php"><img src="webroot/images/ejecutar.png" alt="ejecutar" height="32"></a></td>
+                </tr>
+                
                 <tr>
             </tbody>
         </table>
