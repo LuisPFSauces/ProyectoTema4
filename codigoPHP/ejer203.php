@@ -8,6 +8,11 @@ and open the template in the editor.
     <head>
         <meta charset="UTF-8">
         <title>Buscar departamento</title>
+        <style>
+            .error{
+                color: red;
+            }
+        </style>
     </head>
     <body>
         <?php
@@ -17,8 +22,8 @@ and open the template in the editor.
         $errores = array(
             "codigo" => null,
             "descripcion" => null,
-            "conexion" => null,
-            "volumen" => null
+            "volumen" => null,
+             "conexion" => null
         );
 
         $formulario = array(
@@ -76,7 +81,7 @@ and open the template in the editor.
             $formulario['volumen'] = $_REQUEST['volumen'];
             try {
                 $conexion = new PDO(DSN, USER, PASSWORD);
-                $prepare = $conexion->prepare("Insert into Departamentos('CodDepartamento','DescDepartamento','VolumenNegocio') values (:codigo , :descripcion , :volumen)");
+                $prepare = $conexion->prepare("Insert into Departamento (CodDepartamento,DescDepartamento,VolumenNegocio) values (:codigo, :descripcion, :volumen)");
                 $ejecucion = $prepare->execute(array(":codigo" => $formulario['codigo'], ":descripcion" => $formulario['descripcion'], ":volumen" => $formulario['volumen']));
 
                 if ($ejecucion) {
@@ -85,7 +90,7 @@ and open the template in the editor.
                     throw new ErrorException("Error al ejecutar la sentencia: ".$prepare ->errorInfo());
                 }
             } catch (Exception $e) {
-                echo "<p>Se ha producido un error al conectar con la base de datos( " . $e->getMessage() . ", " . $e->getCode() . ")</p>";
+                echo "<p class=\"error\">Se ha producido un error al conectar con la base de datos( " . $e->getMessage() . ", " . $e->getCode() . ")</p>";
             } finally {
                 unset($conexion);
             }
@@ -106,6 +111,7 @@ and open the template in the editor.
                 <input type="text" id="volumen" name="volumen" value="<?php if (isset($_REQUEST["volumen"])) echo $_REQUEST["volumen"]; ?>">
                 <?php
                 echo!empty($errores['volumen']) ? "<p class=\"error\">" . $errores['volumen'] . "</p>" : "";
+                echo!empty($errores['conexion']) ? "<p class=\"error\">" .$errores['conexion'] . "</p>" : "";
                 ?>
                 <input type="submit" value="consulta" name="enviar">
             </form>
