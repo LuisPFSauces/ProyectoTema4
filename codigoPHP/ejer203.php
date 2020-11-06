@@ -81,10 +81,7 @@ and open the template in the editor.
             $formulario['volumen'] = $_REQUEST['volumen'];
             try {
                 $conexion = new PDO(DSN, USER, PASSWORD);
-<<<<<<< HEAD
                 $prepare = $conexion->prepare("Insert into Departamento (CodDepartamento,DescDepartamento,VolumenNegocio) values (:codigo, :descripcion, :volumen)");
-=======
->>>>>>> 2020-11-5
                 $ejecucion = $prepare->execute(array(":codigo" => $formulario['codigo'], ":descripcion" => $formulario['descripcion'], ":volumen" => $formulario['volumen']));
 
                 if ($ejecucion) {
