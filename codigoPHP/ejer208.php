@@ -7,9 +7,24 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <title>Exportar PHP</title>
+        <style>
+           
+            .descarga{
+                display: inline-block;
+                text-decoration: none;
+                background: coral;
+                color: white;
+                height:40px;
+                line-height: 40px;
+                width: 15%;
+                text-align: center;
+                margin: auto;
+            }
+        </style>
     </head>
     <body>
+        <a href="descargar.php" class="descarga">Descargar</a>
         <?php
         require_once '../config/confDBPDO.php';
 
@@ -28,46 +43,40 @@ and open the template in the editor.
             }
         }
 
-        if (isset($_REQUEST["exportar"])) {
+        try {
 
-            try {
+            $miDB = new PDO(DSN, USER, PASSWORD);
+            $consulta = $miDB->prepare("Select * from Departamento");
+            $consulta->execute();
 
-                $miDB = new PDO(DSN, USER, PASSWORD);
-                $prepare = $miDB->prepare("Select * from Departamento");
-                $prepare->execute();
-
-                $dom = new DOMDocument("1.0", "UTF-8");
-                $dom->preserveWhiteSpace = true;
-                $dom->formatOutput = true;
+            $dom = new DOMDocument("1.0", "UTF-8");
+            $dom->preserveWhiteSpace = true;
+            $dom->formatOutput = true;
 
 
-                $root = $dom->createElement("Departamentos");
-                $dom->appendChild($root);
+            $root = $dom->createElement("Departamentos");
+            $dom->appendChild($root);
 
-                $oDepartamento = $prepare->fetch();
-                while ($oDepartamento) {
-                    $departamento = crearHijo("Departamento", $dom, $root);
-                    crearHijo('CodDepartamento', $dom, $departamento, $oDepartamento['CodDepartamento']);
-                    crearHijo('DescDepartamento', $dom, $departamento, $oDepartamento['DescDepartamento']);
-                    crearHijo('FechaBaja', $dom, $departamento, $oDepartamento['FechaBaja']);
-                    crearHijo('Volumen', $dom, $departamento, $oDepartamento['VolumenNegocio']);
+            $oDepartamento = $consulta->fetchObject();
+            while ($oDepartamento) {
+                $departamento = crearHijo("Departamento", $dom, $root);
+                crearHijo('CodDepartamento', $dom, $departamento, $oDepartamento->CodDepartamento);
+                crearHijo('DescDepartamento', $dom, $departamento, $oDepartamento->DescDepartamento);
+                crearHijo('FechaBaja', $dom, $departamento, $oDepartamento->FechaBaja);
+                crearHijo('Volumen', $dom, $departamento, $oDepartamento->VolumenNegocio);
 
-                    $oDepartamento = $prepare->fetch();
-                }
-
-                header('Content-Disposition: attachment;filename="SQL.xml"');
-                header('Content-Type: text/xml');
-
-                echo $dom->saveXML();
-            } catch (Exception $e) {
-                echo "Error " . $e->getCode() . ", " . $e->getMessage() . ".";
-            } finally {
-                unset($miDB);
+                $oDepartamento = $consulta->fetchObject();
             }
+            $dom->saveXML();
+            $dom->save("../tmp/SQL.xml");
+            echo "<div>";
+            highlight_file("../tmp/SQL.xml");
+            echo "</div>";
+        } catch (Exception $e) {
+            echo "Error " . $e->getCode() . ", " . $e->getMessage() . ".";
+        } finally {
+            unset($miDB);
         }
         ?>
-        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-            <input type="submit" name="exportar" value="Exportar">
-        </form>
     </body>
 </html>

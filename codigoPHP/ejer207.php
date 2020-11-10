@@ -28,7 +28,7 @@ and open the template in the editor.
         if ($entradaOK) {
             try {
                 $dom = new DOMDocument;
-                $dom->load($archivo);
+                $dom->loadXML($archivo);
                 $miDB = new PDO(DSN, USER, PASSWORD);
                 $prepare = $miDB->prepare("Insert into Departamento values (:codigo, :descripcion, :fecha, :volumen)");
 
