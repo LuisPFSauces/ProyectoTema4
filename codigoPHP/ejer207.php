@@ -28,12 +28,13 @@ and open the template in the editor.
         if ($entradaOK) {
             try {
                 $dom = new DOMDocument;
-                $dom->loadXML($archivo);
+                $dom->load($archivo);
                 $miDB = new PDO(DSN, USER, PASSWORD);
+                
                 $prepare = $miDB->prepare("Insert into Departamento values (:codigo, :descripcion, :fecha, :volumen)");
 
                 $departamento = $dom->getElementsByTagName('Departamento');
-                $miDB ->beginTransaction();
+                $miDB->beginTransaction();
                 foreach ($departamento as $dep) {
                     $valores = $dep->childNodes;
 
@@ -43,17 +44,18 @@ and open the template in the editor.
                         ":fecha" => empty($valores->item(5)->nodeValue) ? null : $valores->item(5)->nodeValue,
                         ":volumen" => $valores->item(7)->nodeValue
                     );
-                    $eje = $prepare->execute($aValores);
                     
-                    if(!$eje){
-                        throw new Exception("Error al insertar en la base de datos");
+                    $eje = $prepare->execute($aValores);
+
+                    if (!$eje) {
+                        throw new Exception("Error al insertar en la base de datos ".$prepare->errorCode());
                     }
                 }
-                $miDB ->commit();
+                $miDB->commit();
                 echo "<p> Todos los datos han sido importados</p>";
             } catch (Exception $e) {
                 echo "Error " . $e->getCode() . ", " . $e->getMessage() . ".";
-                $miDB ->rollBack();
+                $miDB->rollBack();
             } finally {
                 unset($miDB);
             }

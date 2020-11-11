@@ -3,6 +3,11 @@
     <head>
         <meta charset="UTF-8">
         <title>Exportar SQL</title>
+        <style>
+            .error{
+                color: red;
+            }
+        </style>
     </head>
     <body>
         <?php
@@ -26,7 +31,7 @@
             );
         }
         $errores["conexion"] = null;
-
+        
         if (isset($_REQUEST['enviar'])) {
             try {
                 $miDB = new PDO(DSN, USER, PASSWORD);
@@ -37,33 +42,32 @@
                     $errores[$insert]["codigo"] = validacionFormularios::comprobarAlfaNumerico($_REQUEST["codigo"][$insert], 3, 3, OBLIGATORIO);
                     $errores[$insert]["descripcion"] = validacionFormularios::comprobarAlfaNumerico($_REQUEST["descripcion"][$insert], 255, 5, OBLIGATORIO);
                     $errores[$insert]["volumen"] = validacionFormularios::comprobarFloat($_REQUEST["volumen"][$insert], PHP_FLOAT_MAX, 0, OBLIGATORIO);
-                    
-                    /*$errores[$insert]["codigo"] =$_REQUEST["codigo"][$insert];
-                    $errores[$insert]["descripcion"] = $_REQUEST["descripcion"][$insert];
-                    $errores[$insert]["volumen"] = $_REQUEST["volumen"][$insert];*/
                     /*
+                    $errores[$insert]["codigo"] =$_REQUEST["codigo"][$insert];
+                    $errores[$insert]["descripcion"] = $_REQUEST["descripcion"][$insert];
+                    $errores[$insert]["volumen"] = $_REQUEST["volumen"][$insert];
+                    
                     echo $_REQUEST["codigo"][$insert]."<br>";
                     echo$_REQUEST["descripcion"][$insert]."<br>";
                     echo $_REQUEST["volumen"][$insert]."<br>";
-                     
-                    echo $_REQUEST["codigo"][$insert]."<br>";
-                    echo$_REQUEST["descripcion"][$insert]."<br>";
-                    echo $_REQUEST["volumen"][$insert]."<br>";
+                     */
                     foreach ($errores[$insert] as $clave => $valor) {
+                        echo "Valores $valor";
                         if (!is_null($valor)) {
+                            echo "for e";
                             $entradaOK = false;
-                            $_REQUEST[$clave] = "";
+                            $_REQUEST[$clave][$insert] = "";
                         }
                     }
-*/
+                    
                     if ($errores[$insert]["codigo"] == null) {
-                        $prepare->bindParam(":codigo", "TIC");
+                        $prepare->bindParam(":codigo", $_REQUEST["codigo"][$insert]);
                         $ejecucion = $prepare->execute();
                         if ($ejecucion) {
                             if ($prepare->rowCount() > 0) {
                                 $entradaOK = false;
-                                $_REQUEST['codigo'] = "";
-                                $errores["codigo"] .= " El codigo de departamento ya existe por favor introduce otro";
+                                $_REQUEST['codigo'][$insert] = "";
+                                $errores[$insert]["codigo"] .= " El codigo de departamento ya existe por favor introduce otro";
                             }
                         } else {
                             throw new ErrorException("Error al ejecutar la sentencia");
@@ -80,26 +84,27 @@
             $entradaOK = false;
         }
         if ($entradaOK) {
+            echo '<p>Entrada en if</p>';
         } else {
             ?>    
             <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
                 <?php for ($insert = 0; $insert < 3; $insert++) { ?>
                     <fieldset>
                         <label for="codigo">Introduce el codigo del departamento: </label>
-                        <input type="text" id="codigo" name="codigo[<?php echo $insert; ?>]" value="<?php if (isset($_REQUEST["codigo"][$insert])){echo $_REQUEST["codigo"][$insert];} ?>"><br>
+                        <input type="text" id="codigo" name="codigo[]" value="<?php if (isset($_REQUEST["codigo"][$insert])){echo $_REQUEST["codigo"][$insert];} ?>">
                         <?php
-                        echo!empty($errores['codigo'][$insert]) ? "<p class=\"error\">" . $errores['codigo'][$insert] . "</p>" : "";
-                        ?>
+                        echo !empty($errores[$insert]['codigo']) ? "<span class=\"error\">" . $errores[$insert]['codigo'] . "</span>" : "";
+                        ?><br>
                         <label for="descripcion">Introduce una descripción del departamento: </label>
-                        <input type="text" id="descripcion" name="descripcion[<?php echo $insert; ?>]" value="<?php if (isset($_REQUEST["descripcion"][$insert])){echo $_REQUEST["descripcion"][$insert];} ?>"><br>
+                        <input type="text" id="descripcion" name="descripcion[]" value="<?php if (isset($_REQUEST["descripcion"][$insert])){echo $_REQUEST["descripcion"][$insert];} ?>">
                         <?php
-                        echo!empty($errores['descripcion'][$insert]) ? "<p class=\"error\">" . $errores['descripcion'][$insert] . "</p>" : "";
-                        ?>
+                        echo !empty($errores[$insert]['descripcion']) ? "<span class=\"error\">" . $errores[$insert]['descripcion'] . "</span>" : "";
+                        ?><br>
                         <label for="volumen">Introduce el volumen de negocio: </label>
-                        <input type="text" id="volumen" name="volumen[<?php echo $insert; ?>]" value="<?php if (isset($_REQUEST["volumen"][$insert])){echo $_REQUEST["volumen"][$insert];} ?>"><br>
+                        <input type="text" id="volumen" name="volumen[]" value="<?php if (isset($_REQUEST["volumen"][$insert])){echo $_REQUEST["volumen"][$insert];} ?>">
                         <?php
-                        echo!empty($errores['volumen'][$insert]) ? "<p class=\"error\">" . $errores['volumen'][$insert] . "</p>" : "";
-                        echo!empty($errores['conexion']) ? "<p class=\"error\">" . $errores['conexion'] . "</p>" : "";
+                        echo !empty($errores[$insert]['volumen']) ? "<span class=\"error\">" . $errores[$insert]['volumen'] . "</span>" : "";
+                        echo !empty($errores['conexion']) ? "<span class=\"error\">" . $errores['conexion'] . "</span>" : "";
                         ?>
                     </fieldset>
                 <?php } ?>

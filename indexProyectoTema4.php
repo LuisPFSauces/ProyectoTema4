@@ -7,7 +7,6 @@
         <link rel="stylesheet" href="webroot/css/estilo.css" >
         <title>Proyecto DWES</title>
     </head>
-
     <body>
         <header>
             <h1>Proyecto DWES</h1>
@@ -37,7 +36,7 @@
                         <td><a href="mostrarCodigo/muestraEjercicio101.php"><img src="webroot/images/ver.png" alt="ver" height="32"></a></td>
                         <td><a href="./codigoPHP/ejer101.php"><img src="webroot/images/ejecutar.png" alt="ejecutar" height="32"></a></td>
                         <td><a href="mostrarCodigo/muestraEjercicio201.php"><img src="webroot/images/ver.png" alt="ver" height="32"></a></td>
-                        <td><a href="./codigoPHP/ejer201.php"><img src="webroot/images/ejecutar.png" alt="ejecutar" height="32"></a></td>s
+                        <td><a href="./codigoPHP/ejer201.php"><img src="webroot/images/ejecutar.png" alt="ejecutar" height="32"></a></td>
                     </tr>
                     <tr>
                         <th>2º</th>
@@ -77,7 +76,6 @@
                         <td><a href="mostrarCodigo/muestraEjercicio208.php"><img src="webroot/images/ver.png" alt="ver" height="32"></a></td>
                         <td><a href="./codigoPHP/ejer208.php"><img src="webroot/images/ejecutar.png" alt="ejecutar" height="32"></a></td>
                     </tr>
-
 
                 </tbody>
             </table>

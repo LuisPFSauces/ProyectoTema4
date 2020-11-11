@@ -1,15 +1,17 @@
+<?php
+if (isset($_REQUEST['exportar'])) {
+    header('Content-Disposition: attachment;filename="SQL.xml"');
+    header('Content-Type: text/xml');
+    readfile("../tmp/SQL.xml");
+} else{
+?>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <meta charset="UTF-8">
         <title>Exportar PHP</title>
         <style>
-           
+
             .descarga{
                 display: inline-block;
                 text-decoration: none;
@@ -24,7 +26,6 @@ and open the template in the editor.
         </style>
     </head>
     <body>
-        <a href="descargar.php" class="descarga">Descargar</a>
         <?php
         require_once '../config/confDBPDO.php';
 
@@ -67,7 +68,6 @@ and open the template in the editor.
 
                 $oDepartamento = $consulta->fetchObject();
             }
-            $dom->saveXML();
             $dom->save("../tmp/SQL.xml");
             echo "<div>";
             highlight_file("../tmp/SQL.xml");
@@ -78,5 +78,9 @@ and open the template in the editor.
             unset($miDB);
         }
         ?>
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST"  enctype = "multipart/form-data">
+            <input type="submit" name="exportar" value="exportar" class="descarga">
+        </form>
     </body>
 </html>
+<?php } ?>
