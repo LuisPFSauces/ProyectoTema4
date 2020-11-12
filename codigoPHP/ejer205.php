@@ -52,19 +52,19 @@
                     echo $_REQUEST["volumen"][$insert]."<br>";
                      */
                     foreach ($errores[$insert] as $clave => $valor) {
-                        echo "Valores $valor";
-                        if (!is_null($valor)) {
-                            echo "for e";
+                        if (!empty($valor)) {
+                            echo "Entrada en el if";
                             $entradaOK = false;
                             $_REQUEST[$clave][$insert] = "";
                         }
                     }
                     
-                    if ($errores[$insert]["codigo"] == null) {
+                    if (empty($errores[$insert]["codigo"])) {
                         $prepare->bindParam(":codigo", $_REQUEST["codigo"][$insert]);
                         $ejecucion = $prepare->execute();
                         if ($ejecucion) {
                             if ($prepare->rowCount() > 0) {
+                                echo "Duplicado". $_REQUEST['codigo'][$insert];
                                 $entradaOK = false;
                                 $_REQUEST['codigo'][$insert] = "";
                                 $errores[$insert]["codigo"] .= " El codigo de departamento ya existe por favor introduce otro";
@@ -84,7 +84,9 @@
             $entradaOK = false;
         }
         if ($entradaOK) {
-            echo '<p>Entrada en if</p>';
+            for ($insert = 0; $insert < 3; $insert++) {
+                
+            }
         } else {
             ?>    
             <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
