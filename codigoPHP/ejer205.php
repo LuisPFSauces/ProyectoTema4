@@ -83,15 +83,17 @@
                 for ($persona = 0; $persona < 3; $persona++) {
                     $formulario[$persona]['codigo'] = $_REQUEST['codigo'][$persona];
                     $formulario[$persona]['descripcion'] = $_REQUEST['descripcion'][$persona];
-                    $formulario[$persona]['codigo'] = $_REQUEST['volumen'][$persona];
+                    $formulario[$persona]['volumen'] = $_REQUEST['volumen'][$persona];
                     $valores = array(
                         ":codigo" => $formulario[$persona]['codigo'],
                         ":descripcion" => $formulario[$persona]['descripcion'],
                         ":volumen" => $formulario[$persona]['volumen']
                     );
                     $eje = $insert->execute($valores);
+                    var_dump($valores);
+                    echo "Valor de eje: ".$eje; 
                     if (!$eje) {
-                        throw new Exception("Error al insertar");
+                        throw new Exception("Error al insertar: ".$insert ->errorInfo());
                     }
                 }
                 $miDB->commit();

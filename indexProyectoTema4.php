@@ -54,13 +54,13 @@
                     </tr>
                     <tr>
                         <th>4º</th>
-                        <td colspan="3">Hora y fecha formateada al castellano</td>
+                        <td colspan="3">Buscar</td>
                         <td><a href="mostrarCodigo/muestraEjercicio204.php"><img src="webroot/images/ver.png" alt="ver" height="32"></a></td>
                         <td><a href="./codigoPHP/ejer204.php"><img src="webroot/images/ejecutar.png" alt="ejecutar" height="32"></a></td>
                     </tr>
                     <tr>
                         <th>5º</th>
-                        <td colspan="3">Prepared</td>
+                        <td colspan="3">Transaccion</td>
                         <td><a href="mostrarCodigo/muestraEjercicio205.php"><img src="webroot/images/ver.png" alt="ver" height="32"></a></td>
                         <td><a href="./codigoPHP/ejer205.php"><img src="webroot/images/ejecutar.png" alt="ejecutar" height="32"></a></td>
                     </tr>
