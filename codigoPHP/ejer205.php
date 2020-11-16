@@ -90,7 +90,6 @@
                         ":volumen" => $formulario[$persona]['volumen']
                     );
                     $eje = $insert->execute($valores);
-                    var_dump($valores);
                     echo "Valor de eje: ".$eje; 
                     if (!$eje) {
                         throw new Exception("Error al insertar: ".$insert ->errorInfo());

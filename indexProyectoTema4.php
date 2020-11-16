@@ -27,7 +27,7 @@
                 <tbody>
                     <tr>
                         <th>0º</th>
-                        <td colspan="4">Scripts iniciales</td>
+                        <td colspan="4">Scripts iniciales y archivos de configuracion</td>
                         <td><a href="codigoPHP/ejer00.php"><img src="webroot/images/ejecutar.png" alt="ejecutar" height="32"></a></td>
                     </tr>
                     <tr>
